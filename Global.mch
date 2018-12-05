@@ -2,31 +2,40 @@
  * Author: 
  * Creation date: 05/12/18
  */
+ 
 MACHINE
     Global
+
 SETS
-    OBJETS
+    OBJET
     ; CATEGORIE = {mobile, fixe}
     ; ETAT = {actif, inactif, invalide}
-    ; POSITION = {x,y}
-    ; TYPE = {robot, alarme}
+    ; INCOMPATIBLE  
     
 VARIABLES
     categorie
     , etat
     , objet
-    , type
+    , position
+    , incompatible
     
 INVARIANT
-    objet <: OBJETS
+    objet <: OBJET
     & categorie : objet --> CATEGORIE
     & etat : objet --> ETAT
-    & type : objet --> TYPE
+    & position : objet --> (NAT |-> NAT)
+    & (objet |-> position <: categorie) => categorie = mobile
+    & incompatible : objet --> OBJET 
+    & (((obj1 |-> obj2 <: incompatible) & (obj1 --> et1 <: ETAT & obj2 --> et2 <: ETAT)) => (et1 /= actif & et2 /= actif))
     
 INITIALISATION
     categorie := {}
     || etat := {}
-    [[ objet := {}
-    || type := {}
+    || objet := {}
+    || position := {}
+    || incompatible := {}
+    
+
+    
     
 END
