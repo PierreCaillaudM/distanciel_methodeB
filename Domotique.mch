@@ -51,13 +51,14 @@ OPERATIONS
         END
     ;
 
-    activerObjet(obj) =
+    activerObjetMobile(obj) =
         PRE
             obj : OBJET
             & obj : objet
-            & {obj |-> actif} /<: etat /* on tolère invalide ? */
+            & {obj |-> mobile} <: categorie 
+            & {obj |-> actif} /<: etat 
         THEN
-            etat := etat - {obj |-> inactif} - {obj |-> invalide} \/ {obj |-> actif}  
+            etat := etat - {obj |-> inactif} - {obj |-> invalide} \/ {obj |-> actif} /* on tolère invalide ? */
         END
     ;
     
@@ -71,18 +72,20 @@ OPERATIONS
         END
     ;
 
-    activerObjetFixe(obj) =
-        PRE
-            obj : OBJET
-            & obj : objet
-            & {obj |-> fixe} <: categorie 
-            & {obj |-> actif} /<: etat /* on tolère invalide ? */            
-        THEN
-            etat := etat - {obj |-> inactif} - {obj |-> invalide} \/ {obj |-> actif} 
-        END
-    ;
 
-//    res <-- getObjetActif(obj) =
+/* ne devrait pas avoir de paramètre */
+//    activerObjetFixe(obj) = /* activer le système d'alarme */
+//        PRE
+//            obj : OBJET
+//            & obj : objet
+//            & {obj |-> fixe} <: categorie 
+//            & {obj |-> actif} /<: etat /* on tolère invalide ? */            
+//        THEN
+//            etat := etat - {obj |-> inactif} - {obj |-> invalide} \/ {obj |-> actif} 
+//        END
+//    ;
+
+//    res <-- getObjetActif =
 //        PRE
 //            
 //        THEN
@@ -90,15 +93,7 @@ OPERATIONS
 //        END
 //    ;
 
-//    res <-- getObjetActif(obj) =
-//        PRE
-//            
-//        THEN
-//            
-//        END
-//    ;
-
-//    res <-- getObjetInvalide(obj) =
+//    res <-- getObjetInvalide =
 //        PRE
 //            
 //        THEN
