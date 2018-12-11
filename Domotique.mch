@@ -73,27 +73,9 @@ OPERATIONS
         END
     ;
 
-/* ne devrait pas avoir de param donc pas de PRE */
-    activerObjetFixe = /* activer le système d'alarme */
-//        BEGIN
-//            !(obj, cat) . ((obj : OBJET & cat : CATEGORIE & obj |-> cat : categorie & cat = fixe) => (#(et) . (et : ETAT & (obj |-> et : etat & et = actif))))
-//        END
-
-
-
+//    activerObjetFixe = /* activer le système d'alarme */
 //        PRE
-//            !(obj, cat) . ((obj : OBJET & cat : CATEGORIE & obj |-> cat : categorie & cat = fixe) => (#(et) . (et : ETAT & (obj |-> et : etat & et = actif))))            
-//        THEN
-//            etat := etat - {obj |-> inactif} - {obj |-> invalide} \/ {obj |-> actif} 
-//        END
-//    ;
-
-
-//        PRE
-//            obj : OBJET
-//            & obj : objet
-//            & {obj |-> fixe} <: categorie 
-//            & {obj |-> actif} /<: etat /* on tolère invalide ? */            
+//            !(obj, cat) . ((obj : OBJET & cat : CATEGORIE & obj |-> cat : categorie & cat = fixe) => (#(et) . (et : ETAT & obj |-> et : etat & (et = inactif or et = invalide))))            
 //        THEN
 //            etat := etat - {obj |-> inactif} - {obj |-> invalide} \/ {obj |-> actif} 
 //        END
