@@ -72,9 +72,8 @@ OPERATIONS
         END
     ;
 
-
-/* ne devrait pas avoir de paramètre */
-//    activerObjetFixe(obj) = /* activer le système d'alarme */
+/* ne devrait pas avoir de parma donc pas de PRE */
+//    activerObjetFixe = /* activer le système d'alarme */
 //        PRE
 //            obj : OBJET
 //            & obj : objet
@@ -85,19 +84,15 @@ OPERATIONS
 //        END
 //    ;
 
-//    res <-- getObjetActif =
-//        PRE
-//            
-//        THEN
-//            
-//        END
-//    ;
+    res <-- getObjetActif =
+        BEGIN
+            res := etat ~[{actif}]
+        END
+    ;
 
-//    res <-- getObjetInvalide =
-//        PRE
-//            
-//        THEN
-//            
-//        END 
+    res <-- getObjetInvalide = 
+        BEGIN
+            res := etat ~[{invalide}]
+        END
 
 END
