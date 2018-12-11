@@ -25,6 +25,7 @@ INVARIANT
     & etat : objet --> ETAT
     & position : objet --> (NAT * NAT)
     & !(obj, pos) . ((obj : OBJET & pos : (NAT * NAT) & obj |-> pos : position) => (#(cat) . (cat : CATEGORIE & cat = mobile)))
+    & !(obj1, obj2, pos1, pos2) . ((obj1 : OBJET & obj2 : OBJET & pos1 : (NAT * NAT) & pos2 : (NAT * NAT) & obj1 |-> pos1 : position & obj2 |-> pos2 : position) => (pos1 /= pos2))
     & incompatible : OBJET <-> OBJET
     & !(obj1, obj2) . ((obj1 : OBJET & obj2 : OBJET & obj1 |-> obj2 : incompatible) => (#(et1, et2) . (et1 : ETAT & et2 : ETAT & (obj1 |-> et1 : etat & obj2 |-> et2 : etat) & (et1 /= actif or et2 /= actif))))
     
@@ -72,8 +73,22 @@ OPERATIONS
         END
     ;
 
-/* ne devrait pas avoir de parma donc pas de PRE */
-//    activerObjetFixe = /* activer le système d'alarme */
+/* ne devrait pas avoir de param donc pas de PRE */
+    activerObjetFixe = /* activer le système d'alarme */
+//        BEGIN
+//            !(obj, cat) . ((obj : OBJET & cat : CATEGORIE & obj |-> cat : categorie & cat = fixe) => (#(et) . (et : ETAT & (obj |-> et : etat & et = actif))))
+//        END
+
+
+
+//        PRE
+//            !(obj, cat) . ((obj : OBJET & cat : CATEGORIE & obj |-> cat : categorie & cat = fixe) => (#(et) . (et : ETAT & (obj |-> et : etat & et = actif))))            
+//        THEN
+//            etat := etat - {obj |-> inactif} - {obj |-> invalide} \/ {obj |-> actif} 
+//        END
+//    ;
+
+
 //        PRE
 //            obj : OBJET
 //            & obj : objet
