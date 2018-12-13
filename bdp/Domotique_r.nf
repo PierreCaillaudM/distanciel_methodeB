@@ -34,9 +34,9 @@ THEORY ListVariablesX IS
   External_Context_List_Variables(Refinement(Domotique_r))==(?);
   Context_List_Variables(Refinement(Domotique_r))==(?);
   Abstract_List_Variables(Refinement(Domotique_r))==(position,objet,incompatible,etat,categorie);
-  Local_List_Variables(Refinement(Domotique_r))==(position,objet,incompatible,etat,categorie);
-  List_Variables(Refinement(Domotique_r))==(position,objet,incompatible,etat,categorie);
-  External_List_Variables(Refinement(Domotique_r))==(position,objet,incompatible,etat,categorie)
+  Local_List_Variables(Refinement(Domotique_r))==(?);
+  List_Variables(Refinement(Domotique_r))==(?);
+  External_List_Variables(Refinement(Domotique_r))==(?)
 END
 &
 THEORY ListVisibleVariablesX IS
@@ -44,8 +44,8 @@ THEORY ListVisibleVariablesX IS
   Abstract_List_VisibleVariables(Refinement(Domotique_r))==(?);
   External_List_VisibleVariables(Refinement(Domotique_r))==(?);
   Expanded_List_VisibleVariables(Refinement(Domotique_r))==(?);
-  List_VisibleVariables(Refinement(Domotique_r))==(?);
-  Internal_List_VisibleVariables(Refinement(Domotique_r))==(?)
+  List_VisibleVariables(Refinement(Domotique_r))==(position,objet,incompatible,etat,categorie);
+  Internal_List_VisibleVariables(Refinement(Domotique_r))==(position,objet,incompatible,etat,categorie)
 END
 &
 THEORY ListOfNewVariablesX IS
@@ -208,10 +208,10 @@ THEORY ListANYVarX IS
 END
 &
 THEORY ListOfIdsX IS
-  List_Of_Ids(Refinement(Domotique_r)) == (? | ? | position,objet,incompatible,etat,categorie | ? | addObjet,activerObjetMobile,desactiverObjet,activerObjetFixe,getObjetActif,getObjetInvalide | ? | ? | ? | Domotique_r);
+  List_Of_Ids(Refinement(Domotique_r)) == (? | ? | ? | ? | addObjet,activerObjetMobile,desactiverObjet,activerObjetFixe,getObjetActif,getObjetInvalide | ? | ? | ? | Domotique_r);
   List_Of_HiddenCst_Ids(Refinement(Domotique_r)) == (? | ?);
   List_Of_VisibleCst_Ids(Refinement(Domotique_r)) == (?);
-  List_Of_VisibleVar_Ids(Refinement(Domotique_r)) == (? | ?);
+  List_Of_VisibleVar_Ids(Refinement(Domotique_r)) == (position,objet,incompatible,etat,categorie | ?);
   List_Of_Ids_SeenBNU(Refinement(Domotique_r)) == (?: ?)
 END
 &
@@ -223,8 +223,8 @@ THEORY ConstantsEnvX IS
   Constants(Refinement(Domotique_r)) == (Type(invalide) == Cst(etype(ETAT,0,2));Type(inactif) == Cst(etype(ETAT,0,2));Type(actif) == Cst(etype(ETAT,0,2));Type(fixe) == Cst(etype(CATEGORIE,0,1));Type(mobile) == Cst(etype(CATEGORIE,0,1)))
 END
 &
-THEORY VariablesEnvX IS
-  Variables(Refinement(Domotique_r)) == (Type(position) == Mvl(SetOf(atype(OBJET,?,?)*(btype(INTEGER,0,MAXINT)*btype(INTEGER,0,MAXINT))));Type(objet) == Mvl(SetOf(atype(OBJET,?,?)));Type(incompatible) == Mvl(SetOf(atype(OBJET,?,?)*atype(OBJET,?,?)));Type(etat) == Mvl(SetOf(atype(OBJET,?,?)*etype(ETAT,0,2)));Type(categorie) == Mvl(SetOf(atype(OBJET,?,?)*etype(CATEGORIE,0,1))))
+THEORY VisibleVariablesEnvX IS
+  VisibleVariables(Refinement(Domotique_r)) == (Type(position) == Mvv(SetOf(atype(OBJET,?,?)*(btype(INTEGER,0,MAXINT)*btype(INTEGER,0,MAXINT))));Type(objet) == Mvv(SetOf(atype(OBJET,?,?)));Type(incompatible) == Mvv(SetOf(atype(OBJET,?,?)*atype(OBJET,?,?)));Type(etat) == Mvv(SetOf(atype(OBJET,?,?)*etype(ETAT,0,2)));Type(categorie) == Mvv(SetOf(atype(OBJET,?,?)*etype(CATEGORIE,0,1))))
 END
 &
 THEORY OperationsEnvX IS

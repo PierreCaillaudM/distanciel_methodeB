@@ -6,7 +6,7 @@
 REFINEMENT Domotique_r
 REFINES Domotique
 
-VARIABLES
+CONCRETE_VARIABLES
     categorie
     , etat
     , incompatible /* l'ensemble des couples d'objets incompatibles */

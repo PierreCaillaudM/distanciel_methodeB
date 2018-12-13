@@ -1,12 +1,12 @@
 <Machine name='Domotique_r' type='refinement'>
 <Abstraction>Domotique</Abstraction>
-<Abstract_Variables>
+<Concrete_Variables>
 <Id value='categorie' typref='2965600913'/>
 <Id value='etat' typref='242939156'/>
 <Id value='incompatible' typref='2838866784'/>
 <Id value='objet' typref='1826075425'/>
 <Id value='position' typref='823814671'/>
-</Abstract_Variables>
+</Concrete_Variables>
 <Initialisation>
 <Nary_Sub op=';'>
 <Assignement_Sub>

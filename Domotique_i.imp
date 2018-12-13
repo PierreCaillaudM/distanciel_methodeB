@@ -6,15 +6,6 @@
 IMPLEMENTATION Domotique_i
 REFINES Domotique_r
 
-VARIABLES
-    categorie
-    , etat
-    , incompatible /* l'ensemble des couples d'objets incompatibles */
-    , objet
-    , position /* l'ensemble des positions (couple (x,y)) des objets mobiles */
-    
-
-
 INITIALISATION
     categorie := {}
     ; etat := {}
