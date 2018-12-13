@@ -1,16 +1,10 @@
 THEORY ProofList IS
-_f(1) & _f(2) & _f(26) & getObjetInvalide.3,(_f(13) & _f(45) => _f(46));
-_f(1) & _f(2) & _f(26) & getObjetInvalide.2,(_f(13) & _f(18) => _f(44));
-_f(1) & _f(2) & _f(26) & getObjetInvalide.1,(_f(13) & _f(16) => _f(37));
-_f(1) & _f(2) & _f(26) & getObjetActif.3,(_f(13) & _f(45) => _f(46));
-_f(1) & _f(2) & _f(26) & getObjetActif.2,(_f(13) & _f(18) => _f(44));
-_f(1) & _f(2) & _f(26) & getObjetActif.1,(_f(13) & _f(16) => _f(37));
-_f(1) & _f(2) & _f(26) & _f(40) & desactiverObjet.3,(_f(6) & _f(7) & _f(30) & _f(13) => _f(42));
-_f(1) & _f(2) & _f(26) & _f(40) & desactiverObjet.2,(_f(13) & _f(18) => _f(41));
-_f(1) & _f(2) & _f(26) & _f(40) & desactiverObjet.1,(_f(13) & _f(16) => _f(37));
-_f(1) & _f(2) & _f(26) & _f(36) & activerObjetMobile.3,(_f(6) & _f(7) & _f(30) & _f(13) => _f(39));
-_f(1) & _f(2) & _f(26) & _f(36) & activerObjetMobile.2,(_f(13) & _f(18) => _f(38));
-_f(1) & _f(2) & _f(26) & _f(36) & activerObjetMobile.1,(_f(13) & _f(16) => _f(37));
+_f(1) & _f(2) & _f(26) & _f(42) & activerObjetFixe.2,(_f(28) & _f(45) & _f(46) & _f(47) & _f(48) & _f(49) & _f(50) & _f(6) & _f(7) & _f(30) & _f(13) => _f(52));
+_f(1) & _f(2) & _f(26) & _f(42) & activerObjetFixe.1,(_f(28) & _f(45) & _f(46) & _f(47) & _f(48) & _f(49) & _f(50) & _f(13) & _f(18) => _f(51));
+_f(1) & _f(2) & _f(26) & _f(39) & desactiverObjet.2,(_f(6) & _f(7) & _f(30) & _f(13) => _f(41));
+_f(1) & _f(2) & _f(26) & _f(39) & desactiverObjet.1,(_f(13) & _f(18) => _f(40));
+_f(1) & _f(2) & _f(26) & _f(36) & activerObjetMobile.2,(_f(6) & _f(7) & _f(30) & _f(13) => _f(38));
+_f(1) & _f(2) & _f(26) & _f(36) & activerObjetMobile.1,(_f(13) & _f(18) => _f(37));
 _f(1) & _f(2) & _f(26) & _f(27) & addObjet.5,(_f(6) & _f(7) & _f(30) & _f(13) => _f(35));
 _f(1) & _f(2) & _f(26) & _f(27) & addObjet.4,(_f(13) & _f(20) => _f(34));
 _f(1) & _f(2) & _f(26) & _f(27) & addObjet.3,(_f(13) & _f(18) => _f(33));
@@ -51,7 +45,7 @@ not(pos1 = pos2);
 "Check invariant ((incompatible) : (((OBJET) <-> (OBJET))))";
 (({}) : (((OBJET) <-> (OBJET))));
 #(et1,et2).(((et1) : (((1..3)*{ETAT}))) & ((et2) : (((1..3)*{ETAT}))) & ((not(et1 = (1|->ETAT))) or (not(et2 = (1|->ETAT)))) & ((((obj1) |-> (et1))) : ({})) & ((((obj2) |-> (et2))) : ({})));
-objet : POW( OBJET) & categorie : objet +-> CATEGORIE & dom(categorie) = objet & ((categorie) : (((objet) --> (CATEGORIE)))) & etat : objet +-> ETAT & dom(etat) = objet & ((etat) : (((objet) --> (ETAT)))) & position : objet +-> (NAT * NAT) & dom(position) = objet & ((position) : (((objet) --> ((NAT * NAT))))) & !(obj,pos).(((((obj) : (OBJET)) & ((pos) : ((NAT * NAT))) & ((((obj) |-> (pos))) : (position))) => (#(cat).(((cat) : (CATEGORIE)) & ((cat) = (mobile)))))) & !(obj1,obj2,pos1,pos2).(((((obj1) : (OBJET)) & ((obj2) : (OBJET)) & ((pos1) : ((NAT * NAT))) & ((pos2) : ((NAT * NAT))) & ((((obj1) |-> (pos1))) : (position)) & ((((obj2) |-> (pos2))) : (position))) => (not(pos1 = pos2)))) & ((incompatible) : (((OBJET) <-> (OBJET)))) & !(obj1,obj2).(((((obj1) : (OBJET)) & ((obj2) : (OBJET)) & ((((obj1) |-> (obj2))) : (incompatible))) => (#(et1,et2).(((et1) : (ETAT)) & ((et2) : (ETAT)) & ((not(et1 = actif)) or (not(et2 = actif))) & ((((obj1) |-> (et1))) : (etat)) & ((((obj2) |-> (et2))) : (etat))))));
+objet : POW( OBJET) & categorie : objet +-> ((1..2)*{CATEGORIE}) & dom(categorie) = objet & ((categorie) : (((objet) --> (((1..2)*{CATEGORIE}))))) & etat : objet +-> ((1..3)*{ETAT}) & dom(etat) = objet & ((etat) : (((objet) --> (((1..3)*{ETAT}))))) & position : objet +-> (NAT * NAT) & dom(position) = objet & ((position) : (((objet) --> ((NAT * NAT))))) & !(obj,pos).(((((obj) : (OBJET)) & ((pos) : ((NAT * NAT))) & ((((obj) |-> (pos))) : (position))) => (#(cat).(((cat) : (((1..2)*{CATEGORIE}))) & ((cat) = ((1|->CATEGORIE))))))) & !(obj1,obj2,pos1,pos2).(((((obj1) : (OBJET)) & ((obj2) : (OBJET)) & ((pos1) : ((NAT * NAT))) & ((pos2) : ((NAT * NAT))) & ((((obj1) |-> (pos1))) : (position)) & ((((obj2) |-> (pos2))) : (position))) => (not(pos1 = pos2)))) & ((incompatible) : (((OBJET) <-> (OBJET)))) & !(obj1,obj2).(((((obj1) : (OBJET)) & ((obj2) : (OBJET)) & ((((obj1) |-> (obj2))) : (incompatible))) => (#(et1,et2).(((et1) : (((1..3)*{ETAT}))) & ((et2) : (((1..3)*{ETAT}))) & ((not(et1 = (1|->ETAT))) or (not(et2 = (1|->ETAT)))) & ((((obj1) |-> (et1))) : (etat)) & ((((obj2) |-> (et2))) : (etat))))));
 ((obj) : (OBJET)) & not(obj : objet) & ((cat) : (((1..2)*{CATEGORIE}))) & not({((obj) |-> (cat))} : POW( categorie));
 ((obj$1) : (OBJET));
 ((((obj$1) |-> (pos))) : (position));
@@ -61,17 +55,24 @@ objet : POW( OBJET) & categorie : objet +-> CATEGORIE & dom(categorie) = objet &
 ((((etat) \/ ({((obj) |-> ((2|->ETAT)))}))) : (((((objet) \/ ({obj}))) --> (((1..3)*{ETAT})))));
 ((position) : (((((objet) \/ ({obj}))) --> ((NAT * NAT)))));
 #(et1,et2).(((et1) : (((1..3)*{ETAT}))) & ((et2) : (((1..3)*{ETAT}))) & ((not(et1 = (1|->ETAT))) or (not(et2 = (1|->ETAT)))) & ((((obj1) |-> (et1))) : (((etat) \/ ({((obj) |-> ((2|->ETAT)))})))) & ((((obj2) |-> (et2))) : (((etat) \/ ({((obj) |-> ((2|->ETAT)))})))));
-((obj) : (OBJET)) & ((obj) : (objet)) & {((obj) |-> ((1|->CATEGORIE)))} : POW( categorie) & not({((obj) |-> ((1|->ETAT)))} : POW( etat));
-((categorie) : (((objet) --> (((1..2)*{CATEGORIE})))));
-((((((etat - {((obj) |-> ((2|->ETAT)))}) - {((obj) |-> ((3|->ETAT)))})) \/ ({((obj) |-> ((1|->ETAT)))}))) : (((objet) --> (((1..3)*{ETAT})))));
-#(et1,et2).(((et1) : (((1..3)*{ETAT}))) & ((et2) : (((1..3)*{ETAT}))) & ((not(et1 = (1|->ETAT))) or (not(et2 = (1|->ETAT)))) & ((((obj1) |-> (et1))) : (((((etat - {((obj) |-> ((2|->ETAT)))}) - {((obj) |-> ((3|->ETAT)))})) \/ ({((obj) |-> ((1|->ETAT)))})))) & ((((obj2) |-> (et2))) : (((((etat - {((obj) |-> ((2|->ETAT)))}) - {((obj) |-> ((3|->ETAT)))})) \/ ({((obj) |-> ((1|->ETAT)))})))));
-((obj) : (OBJET)) & ((obj) : (objet)) & not({((obj) |-> ((2|->ETAT)))} : POW( etat));
-((((((etat - {((obj) |-> ((1|->ETAT)))}) - {((obj) |-> ((3|->ETAT)))})) \/ ({((obj) |-> ((2|->ETAT)))}))) : (((objet) --> (((1..3)*{ETAT})))));
-#(et1,et2).(((et1) : (((1..3)*{ETAT}))) & ((et2) : (((1..3)*{ETAT}))) & ((not(et1 = (1|->ETAT))) or (not(et2 = (1|->ETAT)))) & ((((obj1) |-> (et1))) : (((((etat - {((obj) |-> ((1|->ETAT)))}) - {((obj) |-> ((3|->ETAT)))})) \/ ({((obj) |-> ((2|->ETAT)))})))) & ((((obj2) |-> (et2))) : (((((etat - {((obj) |-> ((1|->ETAT)))}) - {((obj) |-> ((3|->ETAT)))})) \/ ({((obj) |-> ((2|->ETAT)))})))));
+((obj) : (OBJET)) & ((obj) : (objet)) & {((obj) |-> ((1|->CATEGORIE)))} : POW( categorie) & not({((obj) |-> ((1|->ETAT)))} : POW( etat)) & not({((obj) |-> ((3|->ETAT)))} : POW( etat));
+(((((etat - {((obj) |-> ((2|->ETAT)))})) \/ ({((obj) |-> ((1|->ETAT)))}))) : (((objet) --> (((1..3)*{ETAT})))));
+#(et1,et2).(((et1) : (((1..3)*{ETAT}))) & ((et2) : (((1..3)*{ETAT}))) & ((not(et1 = (1|->ETAT))) or (not(et2 = (1|->ETAT)))) & ((((obj1) |-> (et1))) : ((((etat - {((obj) |-> ((2|->ETAT)))})) \/ ({((obj) |-> ((1|->ETAT)))})))) & ((((obj2) |-> (et2))) : ((((etat - {((obj) |-> ((2|->ETAT)))})) \/ ({((obj) |-> ((1|->ETAT)))})))));
+((obj) : (OBJET)) & ((obj) : (objet)) & not({((obj) |-> ((2|->ETAT)))} : POW( etat)) & not({((obj) |-> ((3|->ETAT)))} : POW( etat));
+(((((etat - {((obj) |-> ((1|->ETAT)))})) \/ ({((obj) |-> ((2|->ETAT)))}))) : (((objet) --> (((1..3)*{ETAT})))));
+#(et1,et2).(((et1) : (((1..3)*{ETAT}))) & ((et2) : (((1..3)*{ETAT}))) & ((not(et1 = (1|->ETAT))) or (not(et2 = (1|->ETAT)))) & ((((obj1) |-> (et1))) : ((((etat - {((obj) |-> ((1|->ETAT)))})) \/ ({((obj) |-> ((2|->ETAT)))})))) & ((((obj2) |-> (et2))) : ((((etat - {((obj) |-> ((1|->ETAT)))})) \/ ({((obj) |-> ((2|->ETAT)))})))));
+!(obj,cat).(((((obj) : (OBJET)) & ((cat) : (((1..2)*{CATEGORIE}))) & ((((obj) |-> (cat))) : (categorie)) & ((cat) = ((2|->CATEGORIE)))) => (#(et).(((et) : (((1..3)*{ETAT}))) & ((((obj) |-> (et))) : (etat)) & ((et) = ((2|->ETAT)))))));
+((obj$2) : (OBJET));
+((((obj$2) |-> (pos))) : (position));
+((cat$1) : (((1..2)*{CATEGORIE})));
+((et) : (((1..3)*{ETAT})));
+((((obj$1) |-> (cat$1))) : (categorie));
+((cat$1) = ((2|->CATEGORIE)));
+((((obj$1) |-> (et))) : (etat));
+((et) = ((2|->ETAT)));
+(((((etat - {((obj$1) |-> ((2|->ETAT)))})) \/ ({((obj$1) |-> ((1|->ETAT)))}))) : (((objet) --> (((1..3)*{ETAT})))));
+#(et1,et2).(((et1) : (((1..3)*{ETAT}))) & ((et2) : (((1..3)*{ETAT}))) & ((not(et1 = (1|->ETAT))) or (not(et2 = (1|->ETAT)))) & ((((obj1) |-> (et1))) : ((((etat - {((obj$1) |-> ((2|->ETAT)))})) \/ ({((obj$1) |-> ((1|->ETAT)))})))) & ((((obj2) |-> (et2))) : ((((etat - {((obj$1) |-> ((2|->ETAT)))})) \/ ({((obj$1) |-> ((1|->ETAT)))})))));
 ((((obj) |-> (pos))) : (position));
-((etat) : (((objet) --> (((1..3)*{ETAT})))));
-"Check invariant !(obj1,obj2).(((((obj1) : (OBJET)) & ((obj2) : (OBJET)) & ((((obj1) |-> (obj2))) : (incompatible))) => (#(et1,et2).(((et1) : (ETAT)) & ((et2) : (ETAT)) & ((not(et1 = actif)) or (not(et2 = actif))) & ((((obj1) |-> (et1))) : (etat)) & ((((obj2) |-> (et2))) : (etat))))))";
-!(obj1,obj2).(((((obj1) : (OBJET)) & ((obj2) : (OBJET)) & ((((obj1) |-> (obj2))) : (incompatible))) => (#(et1,et2).(((et1) : (((1..3)*{ETAT}))) & ((et2) : (((1..3)*{ETAT}))) & ((not(et1 = (1|->ETAT))) or (not(et2 = (1|->ETAT)))) & ((((obj1) |-> (et1))) : (etat)) & ((((obj2) |-> (et2))) : (etat))))));
 ((1..2)*{CATEGORIE}): FIN(NATURAL*{CATEGORIE}) & not(((1..2)*{CATEGORIE}) = {});
 ((cat) : (((1..2)*{CATEGORIE})));
 ((((obj1) |-> (pos1))) : (position));
@@ -89,12 +90,19 @@ dom(position) = objet;
 ((position) : (((objet) --> ((NAT * NAT)))));
 etat : objet +-> ((1..3)*{ETAT});
 dom(etat) = objet;
+((etat) : (((objet) --> (((1..3)*{ETAT})))));
 categorie : objet +-> ((1..2)*{CATEGORIE});
 dom(categorie) = objet;
+((categorie) : (((objet) --> (((1..2)*{CATEGORIE})))));
 objet : POW( OBJET);
 not(obj : objet);
+not({((obj) |-> ((1|->ETAT)))} : POW( etat));
 {((obj) |-> ((1|->CATEGORIE)))} : POW( categorie);
-((obj) : (objet))
+((obj) : (objet));
+not({((obj) |-> ((2|->ETAT)))} : POW( etat));
+((((obj) |-> (cat))) : (categorie));
+((((obj) |-> (et))) : (etat));
+((cat) = ((2|->CATEGORIE)))
 END
 &
 THEORY EnumerateX IS

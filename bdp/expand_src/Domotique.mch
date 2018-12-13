@@ -20,12 +20,17 @@ ABSTRACT_VARIABLES
     , position /* l'ensemble des positions (couple (x,y)) des objets mobiles */
 
 INVARIANT
+    /* objet */
     objet <: OBJET
+    /* categorie */
     & categorie : objet --> CATEGORIE
+    /* etat */
     & etat : objet --> ETAT
+    /* position */
     & position : objet --> ( NAT * NAT )
     & ! ( obj , pos ) . ( ( obj : OBJET & pos : ( NAT * NAT ) & obj |-> pos : position ) => ( # ( cat ) . ( cat : CATEGORIE & cat = mobile ) ) )
     & ! ( obj1 , obj2 , pos1 , pos2 ) . ( ( obj1 : OBJET & obj2 : OBJET & pos1 : ( NAT * NAT ) & pos2 : ( NAT * NAT ) & obj1 |-> pos1 : position & obj2 |-> pos2 : position ) => ( pos1 /= pos2 ) )
+    /* incompatible */
     & incompatible : OBJET <-> OBJET
     & ! ( obj1 , obj2 ) . ( ( obj1 : OBJET & obj2 : OBJET & obj1 |-> obj2 : incompatible ) => ( # ( et1 , et2 ) . ( et1 : ETAT & et2 : ETAT & ( obj1 |-> et1 : etat & obj2 |-> et2 : etat ) & ( et1 /= actif or et2 /= actif ) ) ) )
 
@@ -58,8 +63,10 @@ OPERATIONS
             & obj : objet
             & { obj |-> mobile } <: categorie
             & { obj |-> actif } /<: etat
+            & { obj |-> invalide } /<: etat
+            /* on considère qu'on ne peut pas activer un objet invalide */
         THEN
-            etat := etat - { obj |-> inactif } - { obj |-> invalide } \/ { obj |-> actif } /* on tolère invalide ? */
+            etat := etat - { obj |-> inactif } \/ { obj |-> actif }
         END
     ;
 
@@ -67,19 +74,24 @@ OPERATIONS
         PRE
             obj : OBJET
             & obj : objet
-            & { obj |-> inactif } /<: etat /* on tolère invalide ? */
+            & { obj |-> inactif } /<: etat
+            & { obj |-> invalide } /<: etat
+            /* on considère qu'on ne peut pas désactiver un objet invalide */
         THEN
-            etat := etat - { obj |-> actif } - { obj |-> invalide } \/ { obj |-> inactif }
+            etat := etat - { obj |-> actif } \/ { obj |-> inactif }
         END
     ;
 
-//    activerObjetFixe = /* activer le système d'alarme */
-//        PRE
-//            !(obj, cat) . ((obj : OBJET & cat : CATEGORIE & obj |-> cat : categorie & cat = fixe) => (#(et) . (et : ETAT & obj |-> et : etat & (et = inactif or et = invalide))))            
-//        THEN
-//            etat := etat - {obj |-> inactif} - {obj |-> invalide} \/ {obj |-> actif} 
-//        END
-//    ;
+    activerObjetFixe = /* activer le système d'alarme */
+       PRE
+           ! ( obj , cat ) . ( ( obj : OBJET & cat : CATEGORIE & obj |-> cat : categorie & cat = fixe ) => ( # ( et ) . ( et : ETAT & obj |-> et : etat & et = inactif ) ) )
+           /* on ne considère pas les les objets invalide */
+       THEN
+           ANY obj , cat , et WHERE obj : OBJET & cat : CATEGORIE & et : ETAT & obj |-> cat : categorie & cat = fixe & obj |-> et : etat & et = inactif THEN
+               etat := etat - { obj |-> inactif } \/ { obj |-> actif }
+            END
+       END
+    ;
 
     res <-- getObjetActif =
         BEGIN

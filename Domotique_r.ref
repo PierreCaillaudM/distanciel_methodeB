@@ -1,0 +1,83 @@
+/* Domotique_r
+ * Author: 
+ * Creation date: 13/12/18
+ */
+
+REFINEMENT Domotique_r
+REFINES Domotique
+
+VARIABLES
+    categorie
+    , etat
+    , incompatible /* l'ensemble des couples d'objets incompatibles */
+    , objet
+    , position /* l'ensemble des positions (couple (x,y)) des objets mobiles */
+    
+
+INITIALISATION
+    categorie := {}
+    || etat := {}
+    || incompatible := {}
+    || objet := {}
+    || position := {}
+
+
+OPERATIONS
+    addObjet(obj, cat) =
+        BEGIN
+            categorie := categorie \/ { obj |-> cat}
+            || etat := etat \/ {obj |-> inactif}
+            || objet := objet \/ {obj}
+            /* mettre une position initiale ? */
+        END
+    ;
+
+
+    activerObjetMobile(obj) =
+        BEGIN
+            etat := etat - {obj |-> inactif} \/ {obj |-> actif}
+        END
+    ;
+
+    
+    desactiverObjet(obj) =
+        BEGIN
+            etat := etat - {obj |-> actif} \/ {obj |-> inactif}  
+        END
+    ;
+
+
+    activerObjetFixe = /* activer le systeme d'alarme */
+        BEGIN
+//           ANY obj, cat, et WHERE obj : OBJET & cat : CATEGORIE & et : ETAT & obj |-> cat : categorie & cat = fixe & obj |-> et : etat & et = inactif THEN
+//               etat := etat - {obj |-> inactif} \/ {obj |-> actif}
+//            END
+            
+            
+            
+            
+         VAR  IN
+             
+         END
+         
+         
+         
+            
+            
+       END
+    ;
+
+
+    res <-- getObjetActif =
+        BEGIN
+            res := etat ~[{actif}]
+        END
+    ;
+
+
+    res <-- getObjetInvalide = 
+        BEGIN
+            res := etat ~[{invalide}]
+        END
+
+ END

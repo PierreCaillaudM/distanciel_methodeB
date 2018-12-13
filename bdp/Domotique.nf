@@ -93,14 +93,15 @@ THEORY ListConstraintsX IS
 END
 &
 THEORY ListOperationsX IS
-  Internal_List_Operations(Machine(Domotique))==(addObjet,activerObjetMobile,desactiverObjet,getObjetActif,getObjetInvalide);
-  List_Operations(Machine(Domotique))==(addObjet,activerObjetMobile,desactiverObjet,getObjetActif,getObjetInvalide)
+  Internal_List_Operations(Machine(Domotique))==(addObjet,activerObjetMobile,desactiverObjet,activerObjetFixe,getObjetActif,getObjetInvalide);
+  List_Operations(Machine(Domotique))==(addObjet,activerObjetMobile,desactiverObjet,activerObjetFixe,getObjetActif,getObjetInvalide)
 END
 &
 THEORY ListInputX IS
   List_Input(Machine(Domotique),addObjet)==(obj,cat);
   List_Input(Machine(Domotique),activerObjetMobile)==(obj);
   List_Input(Machine(Domotique),desactiverObjet)==(obj);
+  List_Input(Machine(Domotique),activerObjetFixe)==(?);
   List_Input(Machine(Domotique),getObjetActif)==(?);
   List_Input(Machine(Domotique),getObjetInvalide)==(?)
 END
@@ -109,6 +110,7 @@ THEORY ListOutputX IS
   List_Output(Machine(Domotique),addObjet)==(?);
   List_Output(Machine(Domotique),activerObjetMobile)==(?);
   List_Output(Machine(Domotique),desactiverObjet)==(?);
+  List_Output(Machine(Domotique),activerObjetFixe)==(?);
   List_Output(Machine(Domotique),getObjetActif)==(res);
   List_Output(Machine(Domotique),getObjetInvalide)==(res)
 END
@@ -117,6 +119,7 @@ THEORY ListHeaderX IS
   List_Header(Machine(Domotique),addObjet)==(addObjet(obj,cat));
   List_Header(Machine(Domotique),activerObjetMobile)==(activerObjetMobile(obj));
   List_Header(Machine(Domotique),desactiverObjet)==(desactiverObjet(obj));
+  List_Header(Machine(Domotique),activerObjetFixe)==(activerObjetFixe);
   List_Header(Machine(Domotique),getObjetActif)==(res <-- getObjetActif);
   List_Header(Machine(Domotique),getObjetInvalide)==(res <-- getObjetInvalide)
 END
@@ -125,8 +128,9 @@ THEORY ListOperationGuardX END
 &
 THEORY ListPreconditionX IS
   List_Precondition(Machine(Domotique),addObjet)==(obj: OBJET & obj/:objet & cat: CATEGORIE & {obj|->cat} /<: categorie);
-  List_Precondition(Machine(Domotique),activerObjetMobile)==(obj: OBJET & obj: objet & {obj|->mobile} <: categorie & {obj|->actif} /<: etat);
-  List_Precondition(Machine(Domotique),desactiverObjet)==(obj: OBJET & obj: objet & {obj|->inactif} /<: etat);
+  List_Precondition(Machine(Domotique),activerObjetMobile)==(obj: OBJET & obj: objet & {obj|->mobile} <: categorie & {obj|->actif} /<: etat & {obj|->invalide} /<: etat);
+  List_Precondition(Machine(Domotique),desactiverObjet)==(obj: OBJET & obj: objet & {obj|->inactif} /<: etat & {obj|->invalide} /<: etat);
+  List_Precondition(Machine(Domotique),activerObjetFixe)==(!(obj,cat).(obj: OBJET & cat: CATEGORIE & obj|->cat: categorie & cat = fixe => #et.(et: ETAT & obj|->et: etat & et = inactif)));
   List_Precondition(Machine(Domotique),getObjetActif)==(btrue);
   List_Precondition(Machine(Domotique),getObjetInvalide)==(btrue)
 END
@@ -134,12 +138,14 @@ END
 THEORY ListSubstitutionX IS
   Expanded_List_Substitution(Machine(Domotique),getObjetInvalide)==(btrue | res:=etat~[{invalide}]);
   Expanded_List_Substitution(Machine(Domotique),getObjetActif)==(btrue | res:=etat~[{actif}]);
-  Expanded_List_Substitution(Machine(Domotique),desactiverObjet)==(obj: OBJET & obj: objet & {obj|->inactif} /<: etat | etat:=etat-{obj|->actif}-{obj|->invalide}\/{obj|->inactif});
-  Expanded_List_Substitution(Machine(Domotique),activerObjetMobile)==(obj: OBJET & obj: objet & {obj|->mobile} <: categorie & {obj|->actif} /<: etat | etat:=etat-{obj|->inactif}-{obj|->invalide}\/{obj|->actif});
+  Expanded_List_Substitution(Machine(Domotique),activerObjetFixe)==(!(obj,cat).(obj: OBJET & cat: CATEGORIE & obj|->cat: categorie & cat = fixe => #et.(et: ETAT & obj|->et: etat & et = inactif)) | @(obj,cat,et).(obj: OBJET & cat: CATEGORIE & et: ETAT & obj|->cat: categorie & cat = fixe & obj|->et: etat & et = inactif ==> etat:=etat-{obj|->inactif}\/{obj|->actif}));
+  Expanded_List_Substitution(Machine(Domotique),desactiverObjet)==(obj: OBJET & obj: objet & {obj|->inactif} /<: etat & {obj|->invalide} /<: etat | etat:=etat-{obj|->actif}\/{obj|->inactif});
+  Expanded_List_Substitution(Machine(Domotique),activerObjetMobile)==(obj: OBJET & obj: objet & {obj|->mobile} <: categorie & {obj|->actif} /<: etat & {obj|->invalide} /<: etat | etat:=etat-{obj|->inactif}\/{obj|->actif});
   Expanded_List_Substitution(Machine(Domotique),addObjet)==(obj: OBJET & obj/:objet & cat: CATEGORIE & {obj|->cat} /<: categorie | categorie,etat,objet:=categorie\/{obj|->cat},etat\/{obj|->inactif},objet\/{obj});
   List_Substitution(Machine(Domotique),addObjet)==(categorie:=categorie\/{obj|->cat} || etat:=etat\/{obj|->inactif} || objet:=objet\/{obj});
-  List_Substitution(Machine(Domotique),activerObjetMobile)==(etat:=etat-{obj|->inactif}-{obj|->invalide}\/{obj|->actif});
-  List_Substitution(Machine(Domotique),desactiverObjet)==(etat:=etat-{obj|->actif}-{obj|->invalide}\/{obj|->inactif});
+  List_Substitution(Machine(Domotique),activerObjetMobile)==(etat:=etat-{obj|->inactif}\/{obj|->actif});
+  List_Substitution(Machine(Domotique),desactiverObjet)==(etat:=etat-{obj|->actif}\/{obj|->inactif});
+  List_Substitution(Machine(Domotique),activerObjetFixe)==(ANY obj,cat,et WHERE obj: OBJET & cat: CATEGORIE & et: ETAT & obj|->cat: categorie & cat = fixe & obj|->et: etat & et = inactif THEN etat:=etat-{obj|->inactif}\/{obj|->actif} END);
   List_Substitution(Machine(Domotique),getObjetActif)==(res:=etat~[{actif}]);
   List_Substitution(Machine(Domotique),getObjetInvalide)==(res:=etat~[{invalide}])
 END
@@ -186,12 +192,13 @@ THEORY ListANYVarX IS
   List_ANY_Var(Machine(Domotique),addObjet)==(?);
   List_ANY_Var(Machine(Domotique),activerObjetMobile)==(?);
   List_ANY_Var(Machine(Domotique),desactiverObjet)==(?);
+  List_ANY_Var(Machine(Domotique),activerObjetFixe)==((Var(obj) == atype(OBJET,?,?)),(Var(cat) == etype(CATEGORIE,?,?)),(Var(et) == etype(ETAT,?,?)));
   List_ANY_Var(Machine(Domotique),getObjetActif)==(?);
   List_ANY_Var(Machine(Domotique),getObjetInvalide)==(?)
 END
 &
 THEORY ListOfIdsX IS
-  List_Of_Ids(Machine(Domotique)) == (CATEGORIE,ETAT,OBJET,mobile,fixe,actif,inactif,invalide | ? | position,objet,incompatible,etat,categorie | ? | addObjet,activerObjetMobile,desactiverObjet,getObjetActif,getObjetInvalide | ? | ? | ? | Domotique);
+  List_Of_Ids(Machine(Domotique)) == (CATEGORIE,ETAT,OBJET,mobile,fixe,actif,inactif,invalide | ? | position,objet,incompatible,etat,categorie | ? | addObjet,activerObjetMobile,desactiverObjet,activerObjetFixe,getObjetActif,getObjetInvalide | ? | ? | ? | Domotique);
   List_Of_HiddenCst_Ids(Machine(Domotique)) == (? | ?);
   List_Of_VisibleCst_Ids(Machine(Domotique)) == (?);
   List_Of_VisibleVar_Ids(Machine(Domotique)) == (? | ?);
@@ -211,7 +218,7 @@ THEORY VariablesEnvX IS
 END
 &
 THEORY OperationsEnvX IS
-  Operations(Machine(Domotique)) == (Type(getObjetInvalide) == Cst(SetOf(atype(OBJET,?,?)),No_type);Type(getObjetActif) == Cst(SetOf(atype(OBJET,?,?)),No_type);Type(desactiverObjet) == Cst(No_type,atype(OBJET,?,?));Type(activerObjetMobile) == Cst(No_type,atype(OBJET,?,?));Type(addObjet) == Cst(No_type,atype(OBJET,?,?)*etype(CATEGORIE,?,?)));
+  Operations(Machine(Domotique)) == (Type(getObjetInvalide) == Cst(SetOf(atype(OBJET,?,?)),No_type);Type(getObjetActif) == Cst(SetOf(atype(OBJET,?,?)),No_type);Type(activerObjetFixe) == Cst(No_type,No_type);Type(desactiverObjet) == Cst(No_type,atype(OBJET,?,?));Type(activerObjetMobile) == Cst(No_type,atype(OBJET,?,?));Type(addObjet) == Cst(No_type,atype(OBJET,?,?)*etype(CATEGORIE,?,?)));
   Observers(Machine(Domotique)) == (Type(getObjetInvalide) == Cst(SetOf(atype(OBJET,?,?)),No_type);Type(getObjetActif) == Cst(SetOf(atype(OBJET,?,?)),No_type))
 END
 &
