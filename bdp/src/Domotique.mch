@@ -64,6 +64,7 @@ OPERATIONS
             & { obj |-> mobile } <: categorie
             & { obj |-> actif } /<: etat
             & { obj |-> invalide } /<: etat
+            & { obj |-> inactif } <: etat
 
         THEN
             etat := etat - { obj |-> inactif } \/ { obj |-> actif }
@@ -76,13 +77,14 @@ OPERATIONS
             & obj : objet
             & { obj |-> inactif } /<: etat
             & { obj |-> invalide } /<: etat
+            & { obj |-> actif } <: etat
 
         THEN
             etat := etat - { obj |-> actif } \/ { obj |-> inactif }
         END
     ;
 
-    activerObjetFixe = /* activer le système d'alarme */
+    activerObjetFixe = /* activer le systeme d'alarme */
        PRE
            ! ( obj , cat ) . ( ( obj : OBJET & cat : CATEGORIE & obj |-> cat : categorie & cat = fixe ) => ( # ( et ) . ( et : ETAT & obj |-> et : etat & et = inactif ) ) )
 

@@ -403,6 +403,15 @@
 </Nary_Exp>
 <Id value='etat' typref='242939156'/>
 </Exp_Comparison>
+<Exp_Comparison op='&lt;:'>
+<Nary_Exp op='{' typref='242939156'>
+<Binary_Exp op='|-&gt;' typref='1652667013'>
+<Id value='obj' typref='2726084962'/>
+<Id value='inactif' typref='678717378'/>
+</Binary_Exp>
+</Nary_Exp>
+<Id value='etat' typref='242939156'/>
+</Exp_Comparison>
 </Nary_Pred>
 </Precondition>
 <Body>
@@ -460,6 +469,15 @@
 <Binary_Exp op='|-&gt;' typref='1652667013'>
 <Id value='obj' typref='2726084962'/>
 <Id value='invalide' typref='678717378'/>
+</Binary_Exp>
+</Nary_Exp>
+<Id value='etat' typref='242939156'/>
+</Exp_Comparison>
+<Exp_Comparison op='&lt;:'>
+<Nary_Exp op='{' typref='242939156'>
+<Binary_Exp op='|-&gt;' typref='1652667013'>
+<Id value='obj' typref='2726084962'/>
+<Id value='actif' typref='678717378'/>
 </Binary_Exp>
 </Nary_Exp>
 <Id value='etat' typref='242939156'/>

@@ -1,19 +1,26 @@
 ﻿THEORY BalanceX IS
-  Domotique,18,0,0,10,0,0,0;
+  Domotique,24,0,0,8,0,0,0;
   Initialisation,7,0,0,7,0,0,0;
-  activerObjetFixe,2,0,0,0,0,0,0;
-  activerObjetMobile,2,0,0,1,0,0,0;
+  activerObjetMobile,3,0,0,0,0,0,0;
   addObjet,5,0,0,1,0,0,0;
-  desactiverObjet,2,0,0,1,0,0,0
+  desactiverObjet,3,0,0,0,0,0,0;
+  getObjetActif,3,0,0,0,0,0,0;
+  getObjetInvalide,3,0,0,0,0,0,0
 END
 &
 THEORY ProofState IS
   Unproved;
   Unproved;
   Unproved;
-  Proved(0);
   Unproved;
-  Proved(0);
+  Unproved;
+  Unproved;
+  Unproved;
+  Unproved;
+  Unproved;
+  Unproved;
+  Unproved;
+  Unproved;
   Unproved;
   Unproved;
   Unproved;
@@ -31,10 +38,16 @@ END
 THEORY MethodList IS
   ?;
   ?;
-  pr;
-  pr;
-  pr;
-  pr;
+  ?;
+  ?;
+  ?;
+  ?;
+  ?;
+  ?;
+  ?;
+  ?;
+  ?;
+  ?;
   ?;
   ?;
   ?;
@@ -53,9 +66,15 @@ THEORY PassList IS
   Force(0),(?;0);
   Force(0),(?;0);
   Force(0),(?;0);
-  Force(0),?;
   Force(0),(?;0);
-  Force(0),?;
+  Force(0),(?;0);
+  Force(0),(?;0);
+  Force(0),(?;0);
+  Force(0),(?;0);
+  Force(0),(?;0);
+  Force(0),(?;0);
+  Force(0),(?;0);
+  Force(0),(?;0);
   Force(0),(?;0);
   Force(0),(?;0);
   Force(0),(?;0);

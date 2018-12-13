@@ -1,10 +1,10 @@
-/* Domotique_r
+/* Domotique_i
  * Author: 
  * Creation date: 13/12/18
  */
 
-REFINEMENT Domotique_r
-REFINES Domotique
+IMPLEMENTATION Domotique_i
+REFINES Domotique_r
 
 VARIABLES
     categorie
@@ -14,12 +14,14 @@ VARIABLES
     , position /* l'ensemble des positions (couple (x,y)) des objets mobiles */
     
 
+
 INITIALISATION
     categorie := {}
     ; etat := {}
     ; incompatible := {}
     ; objet := {}
     ; position := {}
+
 
 
 OPERATIONS
@@ -33,11 +35,13 @@ OPERATIONS
     ;
 
 
+
     activerObjetMobile(obj) =
         BEGIN
             etat := etat - {obj |-> inactif} \/ {obj |-> actif}
         END
     ;
+
 
     
     desactiverObjet(obj) =
@@ -45,6 +49,7 @@ OPERATIONS
             etat := etat - {obj |-> actif} \/ {obj |-> inactif}  
         END
     ;
+
 
 
     activerObjetFixe = /* activer le systeme d'alarme */
@@ -56,11 +61,13 @@ OPERATIONS
     ;
 
 
+
     res <-- getObjetActif =
         BEGIN
             res := etat ~[{actif}]
         END
     ;
+
 
 
     res <-- getObjetInvalide = 

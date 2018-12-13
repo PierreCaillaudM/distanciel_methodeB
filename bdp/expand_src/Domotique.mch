@@ -64,6 +64,7 @@ OPERATIONS
             & { obj |-> mobile } <: categorie
             & { obj |-> actif } /<: etat
             & { obj |-> invalide } /<: etat
+            & { obj |-> inactif } <: etat
             /* on considère qu'on ne peut pas activer un objet invalide */
         THEN
             etat := etat - { obj |-> inactif } \/ { obj |-> actif }
@@ -76,16 +77,17 @@ OPERATIONS
             & obj : objet
             & { obj |-> inactif } /<: etat
             & { obj |-> invalide } /<: etat
-            /* on considère qu'on ne peut pas désactiver un objet invalide */
+            & { obj |-> actif } <: etat
+            /* on considere qu'on ne peut pas désactiver un objet invalide */
         THEN
             etat := etat - { obj |-> actif } \/ { obj |-> inactif }
         END
     ;
 
-    activerObjetFixe = /* activer le système d'alarme */
+    activerObjetFixe = /* activer le systeme d'alarme */
        PRE
            ! ( obj , cat ) . ( ( obj : OBJET & cat : CATEGORIE & obj |-> cat : categorie & cat = fixe ) => ( # ( et ) . ( et : ETAT & obj |-> et : etat & et = inactif ) ) )
-           /* on ne considère pas les les objets invalide */
+           /* on ne considere pas les les objets invalide */
        THEN
            ANY obj , cat , et WHERE obj : OBJET & cat : CATEGORIE & et : ETAT & obj |-> cat : categorie & cat = fixe & obj |-> et : etat & et = inactif THEN
                etat := etat - { obj |-> inactif } \/ { obj |-> actif }

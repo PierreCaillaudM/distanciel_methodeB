@@ -880,6 +880,15 @@
 </Nary_Exp>
 <Id tag="/home/divinity/Documents/FAC/M2_semestre_1/Ingenierie_logicielle_formelle/distanciel/Exo3_ILF/bdp/Domotique.bxml:1:5:2:2:1:5:2" typref="242939156" value="etat"/>
 </Exp_Comparison>
+<Exp_Comparison op="&lt;:">
+<Nary_Exp op="{" typref="242939156">
+<Binary_Exp op="|-&gt;" typref="1652667013">
+<Id tag="/home/divinity/Documents/FAC/M2_semestre_1/Ingenierie_logicielle_formelle/distanciel/Exo3_ILF/bdp/Domotique.bxml:1:5:2:2:1:6:1:1:1" typref="2726084962" value="obj"/>
+<Id tag="/home/divinity/Documents/FAC/M2_semestre_1/Ingenierie_logicielle_formelle/distanciel/Exo3_ILF/bdp/Domotique.bxml:1:5:2:2:1:6:1:1:2" typref="678717378" value="inactif"/>
+</Binary_Exp>
+</Nary_Exp>
+<Id tag="/home/divinity/Documents/FAC/M2_semestre_1/Ingenierie_logicielle_formelle/distanciel/Exo3_ILF/bdp/Domotique.bxml:1:5:2:2:1:6:2" typref="242939156" value="etat"/>
+</Exp_Comparison>
 </Nary_Pred>
 </Hypothesis>
 <Goal>
@@ -1165,6 +1174,15 @@
 </Binary_Exp>
 </Nary_Exp>
 <Id tag="/home/divinity/Documents/FAC/M2_semestre_1/Ingenierie_logicielle_formelle/distanciel/Exo3_ILF/bdp/Domotique.bxml:1:5:3:2:1:4:2" typref="242939156" value="etat"/>
+</Exp_Comparison>
+<Exp_Comparison op="&lt;:">
+<Nary_Exp op="{" typref="242939156">
+<Binary_Exp op="|-&gt;" typref="1652667013">
+<Id tag="/home/divinity/Documents/FAC/M2_semestre_1/Ingenierie_logicielle_formelle/distanciel/Exo3_ILF/bdp/Domotique.bxml:1:5:3:2:1:5:1:1:1" typref="2726084962" value="obj"/>
+<Id tag="/home/divinity/Documents/FAC/M2_semestre_1/Ingenierie_logicielle_formelle/distanciel/Exo3_ILF/bdp/Domotique.bxml:1:5:3:2:1:5:1:1:2" typref="678717378" value="actif"/>
+</Binary_Exp>
+</Nary_Exp>
+<Id tag="/home/divinity/Documents/FAC/M2_semestre_1/Ingenierie_logicielle_formelle/distanciel/Exo3_ILF/bdp/Domotique.bxml:1:5:3:2:1:5:2" typref="242939156" value="etat"/>
 </Exp_Comparison>
 </Nary_Pred>
 </Hypothesis>
@@ -3178,6 +3196,26 @@
 </Binary_Pred>
 <Nary_Pred op="&amp;"/>
 </Binary_Pred>
+<Binary_Pred op="=&gt;">
+<Exp_Comparison op="/&lt;:">
+<Nary_Exp op="{" typref="242939156">
+<Binary_Exp op="|-&gt;" typref="1652667013">
+<Id tag="/home/divinity/Documents/FAC/M2_semestre_1/Ingenierie_logicielle_formelle/distanciel/Exo3_ILF/bdp/Domotique.bxml:1:5:2:2:1:5:1:1:1" typref="2726084962" value="obj"/>
+<Id tag="/home/divinity/Documents/FAC/M2_semestre_1/Ingenierie_logicielle_formelle/distanciel/Exo3_ILF/bdp/Domotique.bxml:1:5:2:2:1:5:1:1:2" typref="678717378" value="invalide"/>
+</Binary_Exp>
+</Nary_Exp>
+<Id tag="/home/divinity/Documents/FAC/M2_semestre_1/Ingenierie_logicielle_formelle/distanciel/Exo3_ILF/bdp/Domotique.bxml:1:5:2:2:1:5:2" typref="242939156" value="etat"/>
+</Exp_Comparison>
+<Nary_Pred op="&amp;">
+<Binary_Pred op="&amp;">
+<Binary_Pred op="&amp;">
+<Nary_Pred op="&amp;"/>
+<Nary_Pred op="&amp;"/>
+</Binary_Pred>
+<Nary_Pred op="&amp;"/>
+</Binary_Pred>
+</Nary_Pred>
+</Binary_Pred>
 </Nary_Pred>
 </Binary_Pred>
 </Nary_Pred>
@@ -3240,6 +3278,15 @@
 </Binary_Exp>
 </Nary_Exp>
 <Id tag="/home/divinity/Documents/FAC/M2_semestre_1/Ingenierie_logicielle_formelle/distanciel/Exo3_ILF/bdp/Domotique.bxml:1:5:2:2:1:5:2" typref="242939156" value="etat"/>
+</Exp_Comparison>
+<Exp_Comparison op="&lt;:">
+<Nary_Exp op="{" typref="242939156">
+<Binary_Exp op="|-&gt;" typref="1652667013">
+<Id tag="/home/divinity/Documents/FAC/M2_semestre_1/Ingenierie_logicielle_formelle/distanciel/Exo3_ILF/bdp/Domotique.bxml:1:5:2:2:1:6:1:1:1" typref="2726084962" value="obj"/>
+<Id tag="/home/divinity/Documents/FAC/M2_semestre_1/Ingenierie_logicielle_formelle/distanciel/Exo3_ILF/bdp/Domotique.bxml:1:5:2:2:1:6:1:1:2" typref="678717378" value="inactif"/>
+</Binary_Exp>
+</Nary_Exp>
+<Id tag="/home/divinity/Documents/FAC/M2_semestre_1/Ingenierie_logicielle_formelle/distanciel/Exo3_ILF/bdp/Domotique.bxml:1:5:2:2:1:6:2" typref="242939156" value="etat"/>
 </Exp_Comparison>
 </Nary_Pred>
 </Hypothesis>
@@ -3326,6 +3373,26 @@
 </Binary_Pred>
 <Nary_Pred op="&amp;"/>
 </Binary_Pred>
+<Binary_Pred op="=&gt;">
+<Exp_Comparison op="/&lt;:">
+<Nary_Exp op="{" typref="242939156">
+<Binary_Exp op="|-&gt;" typref="1652667013">
+<Id tag="/home/divinity/Documents/FAC/M2_semestre_1/Ingenierie_logicielle_formelle/distanciel/Exo3_ILF/bdp/Domotique.bxml:1:5:3:2:1:4:1:1:1" typref="2726084962" value="obj"/>
+<Id tag="/home/divinity/Documents/FAC/M2_semestre_1/Ingenierie_logicielle_formelle/distanciel/Exo3_ILF/bdp/Domotique.bxml:1:5:3:2:1:4:1:1:2" typref="678717378" value="invalide"/>
+</Binary_Exp>
+</Nary_Exp>
+<Id tag="/home/divinity/Documents/FAC/M2_semestre_1/Ingenierie_logicielle_formelle/distanciel/Exo3_ILF/bdp/Domotique.bxml:1:5:3:2:1:4:2" typref="242939156" value="etat"/>
+</Exp_Comparison>
+<Nary_Pred op="&amp;">
+<Binary_Pred op="&amp;">
+<Binary_Pred op="&amp;">
+<Nary_Pred op="&amp;"/>
+<Nary_Pred op="&amp;"/>
+</Binary_Pred>
+<Nary_Pred op="&amp;"/>
+</Binary_Pred>
+</Nary_Pred>
+</Binary_Pred>
 </Nary_Pred>
 </Binary_Pred>
 </Nary_Pred>
@@ -3377,6 +3444,15 @@
 </Binary_Exp>
 </Nary_Exp>
 <Id tag="/home/divinity/Documents/FAC/M2_semestre_1/Ingenierie_logicielle_formelle/distanciel/Exo3_ILF/bdp/Domotique.bxml:1:5:3:2:1:4:2" typref="242939156" value="etat"/>
+</Exp_Comparison>
+<Exp_Comparison op="&lt;:">
+<Nary_Exp op="{" typref="242939156">
+<Binary_Exp op="|-&gt;" typref="1652667013">
+<Id tag="/home/divinity/Documents/FAC/M2_semestre_1/Ingenierie_logicielle_formelle/distanciel/Exo3_ILF/bdp/Domotique.bxml:1:5:3:2:1:5:1:1:1" typref="2726084962" value="obj"/>
+<Id tag="/home/divinity/Documents/FAC/M2_semestre_1/Ingenierie_logicielle_formelle/distanciel/Exo3_ILF/bdp/Domotique.bxml:1:5:3:2:1:5:1:1:2" typref="678717378" value="actif"/>
+</Binary_Exp>
+</Nary_Exp>
+<Id tag="/home/divinity/Documents/FAC/M2_semestre_1/Ingenierie_logicielle_formelle/distanciel/Exo3_ILF/bdp/Domotique.bxml:1:5:3:2:1:5:2" typref="242939156" value="etat"/>
 </Exp_Comparison>
 </Nary_Pred>
 </Hypothesis>

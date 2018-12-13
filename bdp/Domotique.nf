@@ -128,8 +128,8 @@ THEORY ListOperationGuardX END
 &
 THEORY ListPreconditionX IS
   List_Precondition(Machine(Domotique),addObjet)==(obj: OBJET & obj/:objet & cat: CATEGORIE & {obj|->cat} /<: categorie);
-  List_Precondition(Machine(Domotique),activerObjetMobile)==(obj: OBJET & obj: objet & {obj|->mobile} <: categorie & {obj|->actif} /<: etat & {obj|->invalide} /<: etat);
-  List_Precondition(Machine(Domotique),desactiverObjet)==(obj: OBJET & obj: objet & {obj|->inactif} /<: etat & {obj|->invalide} /<: etat);
+  List_Precondition(Machine(Domotique),activerObjetMobile)==(obj: OBJET & obj: objet & {obj|->mobile} <: categorie & {obj|->actif} /<: etat & {obj|->invalide} /<: etat & {obj|->inactif} <: etat);
+  List_Precondition(Machine(Domotique),desactiverObjet)==(obj: OBJET & obj: objet & {obj|->inactif} /<: etat & {obj|->invalide} /<: etat & {obj|->actif} <: etat);
   List_Precondition(Machine(Domotique),activerObjetFixe)==(!(obj,cat).(obj: OBJET & cat: CATEGORIE & obj|->cat: categorie & cat = fixe => #et.(et: ETAT & obj|->et: etat & et = inactif)));
   List_Precondition(Machine(Domotique),getObjetActif)==(btrue);
   List_Precondition(Machine(Domotique),getObjetInvalide)==(btrue)
@@ -139,8 +139,8 @@ THEORY ListSubstitutionX IS
   Expanded_List_Substitution(Machine(Domotique),getObjetInvalide)==(btrue | res:=etat~[{invalide}]);
   Expanded_List_Substitution(Machine(Domotique),getObjetActif)==(btrue | res:=etat~[{actif}]);
   Expanded_List_Substitution(Machine(Domotique),activerObjetFixe)==(!(obj,cat).(obj: OBJET & cat: CATEGORIE & obj|->cat: categorie & cat = fixe => #et.(et: ETAT & obj|->et: etat & et = inactif)) | @(obj,cat,et).(obj: OBJET & cat: CATEGORIE & et: ETAT & obj|->cat: categorie & cat = fixe & obj|->et: etat & et = inactif ==> etat:=etat-{obj|->inactif}\/{obj|->actif}));
-  Expanded_List_Substitution(Machine(Domotique),desactiverObjet)==(obj: OBJET & obj: objet & {obj|->inactif} /<: etat & {obj|->invalide} /<: etat | etat:=etat-{obj|->actif}\/{obj|->inactif});
-  Expanded_List_Substitution(Machine(Domotique),activerObjetMobile)==(obj: OBJET & obj: objet & {obj|->mobile} <: categorie & {obj|->actif} /<: etat & {obj|->invalide} /<: etat | etat:=etat-{obj|->inactif}\/{obj|->actif});
+  Expanded_List_Substitution(Machine(Domotique),desactiverObjet)==(obj: OBJET & obj: objet & {obj|->inactif} /<: etat & {obj|->invalide} /<: etat & {obj|->actif} <: etat | etat:=etat-{obj|->actif}\/{obj|->inactif});
+  Expanded_List_Substitution(Machine(Domotique),activerObjetMobile)==(obj: OBJET & obj: objet & {obj|->mobile} <: categorie & {obj|->actif} /<: etat & {obj|->invalide} /<: etat & {obj|->inactif} <: etat | etat:=etat-{obj|->inactif}\/{obj|->actif});
   Expanded_List_Substitution(Machine(Domotique),addObjet)==(obj: OBJET & obj/:objet & cat: CATEGORIE & {obj|->cat} /<: categorie | categorie,etat,objet:=categorie\/{obj|->cat},etat\/{obj|->inactif},objet\/{obj});
   List_Substitution(Machine(Domotique),addObjet)==(categorie:=categorie\/{obj|->cat} || etat:=etat\/{obj|->inactif} || objet:=objet\/{obj});
   List_Substitution(Machine(Domotique),activerObjetMobile)==(etat:=etat-{obj|->inactif}\/{obj|->actif});

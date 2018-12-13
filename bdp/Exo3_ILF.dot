@@ -1,4 +1,4 @@
 digraph {
-Domotique_r [ label=" Domotique\nDomotique_r " shape= box ]
+Domotique_i [ label=" Domotique\nDomotique_r\nDomotique_i " shape= box ]
 
 }

@@ -7,6 +7,9 @@
         <component_file path="/home/divinity/Documents/FAC/M2_semestre_1/Ingenierie_logicielle_formelle/distanciel/Exo3_ILF" name="Domotique" suffix="mch" user="divinity">
             <component name="Domotique" type="specification" />
         </component_file>
+        <component_file path="/home/divinity/Documents/FAC/M2_semestre_1/Ingenierie_logicielle_formelle/distanciel/Exo3_ILF" name="Domotique_i" suffix="imp" user="divinity">
+            <component name="Domotique_i" type="implementation" />
+        </component_file>
         <component_file path="/home/divinity/Documents/FAC/M2_semestre_1/Ingenierie_logicielle_formelle/distanciel/Exo3_ILF" name="Domotique_r" suffix="ref" user="divinity">
             <component name="Domotique_r" type="refinement" />
         </component_file>
