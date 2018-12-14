@@ -5,7 +5,7 @@
 
 REFINEMENT Domotique_r
 REFINES Domotique
-
+    
 CONCRETE_VARIABLES
     categorie
     , etat
@@ -49,10 +49,10 @@ OPERATIONS
 
     activerObjetFixe = /* activer le systeme d'alarme */
         BEGIN
-           ANY obj, cat, et WHERE obj : OBJET & cat : CATEGORIE & et : ETAT & obj |-> cat : categorie & cat = fixe & obj |-> et : etat & et = inactif THEN
+            ANY obj, cat, et WHERE obj : OBJET & cat : CATEGORIE & et : ETAT & obj |-> cat : categorie & cat = fixe & obj |-> et : etat & et = inactif THEN
                etat := etat - {obj |-> inactif} \/ {obj |-> actif}
             END
-       END
+        END
     ;
 
 
@@ -68,4 +68,5 @@ OPERATIONS
             res := etat ~[{invalide}]
         END
 
- END
+END
+ 

@@ -1,6 +1,6 @@
 /* Domotique_i
  * Author: 
- * Creation date: 13/12/18
+ * Creation date: 14/12/18
  */
 
 IMPLEMENTATION Domotique_i
@@ -45,10 +45,34 @@ OPERATIONS
 
     activerObjetFixe = /* activer le systeme d'alarme */
         BEGIN
-           ANY obj, cat, et WHERE obj : OBJET & cat : CATEGORIE & et : ETAT & obj |-> cat : categorie & cat = fixe & obj |-> et : etat & et = inactif THEN
-               etat := etat - {obj |-> inactif} \/ {obj |-> actif}
+//            ANY obj, cat, et WHERE obj : OBJET & cat : CATEGORIE & et : ETAT & obj |-> cat : categorie & cat = fixe & obj |-> et : etat & et = inactif THEN
+//               etat := etat - {obj |-> inactif} \/ {obj |-> actif}
+//            END
+
+
+            // probleme d'iteration et de recuperation de l'obj dans objet
+            VAR ii, obj, cat, et IN
+                ii := 1; 
+                WHILE  ii <= card(objet)
+                DO
+                    etat := etat - {/* obj == ii */ objet(ii) |-> inactif} \/ {/* obj == ii */ objet(ii) |-> actif};
+                    ii := ii + 1
+                INVARIANT
+                    ii : INT
+                    & obj : OBJET 
+                    & cat : CATEGORIE 
+                    & et : ETAT 
+                    & obj |-> cat : categorie 
+                    & cat = fixe 
+                    & obj |-> et : etat 
+                    & et = inactif
+                VARIANT
+                    ii
+                END
             END
-       END
+            
+            
+        END
     ;
 
 
